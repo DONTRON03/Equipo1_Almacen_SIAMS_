@@ -1,24 +1,47 @@
 #include <iostream>
 #include <string>
-using namespace std;
-struct Persona {
-    string nombre;
-    int edad;
-    float altura;
+
+struct Empleado {
+    std::string nombre;
+    char sexo;
+    double salario;
+    std::string puesto;
 };
 
+void mostrarEmpleado(const Empleado& empleado) {
+    using namespace std;
+    cout << "\nInformacion del empleado:" << endl;
+    cout << "Nombre: " << empleado.nombre << endl;
+    cout << "Sexo: " << empleado.sexo << endl;
+    cout << "Salario: " << empleado.salario << endl;
+    cout << "Puesto: " << empleado.puesto << endl;
+}
+
+void crearEmpleado(Empleado& empleado, const std::string& nombre, char sexo, double salario, const std::string& puesto) {
+    empleado.nombre = nombre;
+    empleado.sexo = sexo;
+    empleado.salario = salario;
+    empleado.puesto = puesto;
+}
+
+void actualizarSalario(Empleado& empleado, double nuevoSalario) {
+    empleado.salario = nuevoSalario;
+}
+
+void actualizarPuesto(Empleado& empleado, const std::string& nuevoPuesto) {
+    empleado.puesto = nuevoPuesto;
+}
+
 int main() {
-    Persona persona1;
-    persona1.nombre = "Stan";
-    persona1.edad = 30;
-    persona1.altura = 1.75f;
+    Empleado empleado1;
 
-    cout << "Nombre: " << persona1.nombre << endl;
-    cout << "Edad: " << persona1.edad << endl;
-    cout << "Altura: " << persona1.altura <<endl;
+    crearEmpleado(empleado1, "Carlos Perez", 'M', 35000.50, "Gerente");
 
-    persona1.edad = 31;
-    cout << "Nueva edad: " << persona1.edad << endl;
+    mostrarEmpleado(empleado1);
+
+    actualizarSalario(empleado1, 37000.75);
+    actualizarPuesto(empleado1, "Director");
+    mostrarEmpleado(empleado1);
 
     return 0;
 }
