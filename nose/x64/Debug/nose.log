@@ -1,0 +1,9 @@
+﻿  admin.cpp
+  anonimo.cpp
+  CppCLR_WinFormsProject.cpp
+  gestionarproveedores.cpp
+  registrado.cpp
+  verproductos.cpp
+  Generando código...
+  admin.obj : se encontró un módulo MSIL; vinculación incremental deshabilitada para MSIL; ejecutando vínculo completo
+  nose.vcxproj -> C:\Users\abril\source\repos\Almacen SIAMS\x64\Debug\nose.exe

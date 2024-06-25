@@ -1,0 +1,9 @@
+C:\Users\abril\source\repos\Almacen SIAMS\nose\x64\Debug\nose.vcxproj.AssemblyReference.cache
+C:\Users\abril\source\repos\Almacen SIAMS\nose\x64\Debug\nose.Form1.resources
+C:\Users\abril\source\repos\Almacen SIAMS\nose\x64\Debug\nose.vcxproj.GenerateResource.cache
+C:\Users\abril\source\repos\Almacen SIAMS\nose\x64\Debug\nose.registrado.resources
+C:\Users\abril\source\repos\Almacen SIAMS\nose\x64\Debug\nose.admin.resources
+C:\Users\abril\source\repos\Almacen SIAMS\nose\x64\Debug\nose.anonimo.resources
+C:\Users\abril\source\repos\Almacen SIAMS\nose\x64\Debug\nose.gestiondeproductos.resources
+C:\Users\abril\source\repos\Almacen SIAMS\nose\x64\Debug\nose.gestionarproveedores.resources
+C:\Users\abril\source\repos\Almacen SIAMS\nose\x64\Debug\nose.verproductos.resources
