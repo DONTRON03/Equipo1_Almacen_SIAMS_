@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <conio.h>
 #include <windows.h>
+#include <string>
 using namespace std;
 
 #define COLOR_DEFAULT   7
@@ -185,30 +186,11 @@ void eliminarProducto() {
     cout << "No se encontró ningun producto con el ID especificado." << endl;
 }
 
-struct usuarioss {
-    string usuario;
-};
 
-usuarioss usu[MAX];
-
-void crearUsuarioss() {
-    setColor(COLOR_MENU);
-    cout << "Ingrese el nombre del usuario" << endl;
-    setColor(COLOR_DEFAULT);
-    cin >> usu[numUsuarios].usuario;
-    numUsuarios++;
-}
-
-void mostrarUsuarioss() {
-    for (int i = 0; i < numUsuarios; i++) {
-        setColor(COLOR_MENU);
-        cout << "Usuario: " << i + 1 << ": ";
-        setColor(COLOR_DEFAULT);
-        cout << usu[i].usuario << endl;
-    }
-}
 
 struct vendedorsh {
+    string ID;
+    string contacto;
     string vendedor;
     string productovend;
     string recom;
@@ -218,35 +200,68 @@ struct vendedorsh {
 vendedorsh vente[MAX];
 
 int numVendedores = 0;
-int numProducts = 0;
-int recomendacion = 0;
-int recomprod = 0;
-
 void nuevovendedor() {
+    setColor(COLOR_MENU);
+    cout << "Ingrese el ID del vendedor:" << endl;
+    setColor(COLOR_DEFAULT);
+    cin >> vente[numVendedores].ID;
     setColor(COLOR_MENU);
     cout << "Ingrese el nombre del vendedor:" << endl;
     setColor(COLOR_DEFAULT);
     cin >> vente[numVendedores].vendedor;
     setColor(COLOR_MENU);
-    cout << "\nIngrese el producto que vende:" << endl;
+    cout << "Ingrese el producto que vende:" << endl;
     setColor(COLOR_DEFAULT);
-    cin >> vente[numProducts].productovend;
+    cin >> vente[numVendedores].productovend;
+    setColor(COLOR_MENU);
+    cout << "Ingrese su contacto (numero de telefono):" << endl;
+    setColor(COLOR_DEFAULT);
+    cin >> vente[numVendedores].contacto;
     numVendedores++;
-    numProducts++;
 }
 
 void mostrarvendedors() {
     for (int i = 0; i < numVendedores; i++) {
-        setColor(COLOR_TITULO);
-        cout << "Vendedor: ";
         setColor(COLOR_MENU);
-        cout << vente[i].vendedor;
-        setColor(COLOR_TITULO);
-        cout << " Producto vendido :" << i + 1 << " : ";
-        setColor(COLOR_MENU);
-        cout << vente[i].productovend << endl;
+        cout << "Vendedor " << i + 1 << ": " << endl;
+        setColor(COLOR_DEFAULT);
+        cout << "ID: " << vente[i].ID << endl;
+        cout << "Nombre: " << vente[i].vendedor << endl;
+        cout << "Producto Vendido: " << vente[i].productovend << endl;
+        cout << "Contacto: " << vente[i].contacto << endl;
+        cout << endl;
     }
 }
+
+void eliminarVendedor() {
+    string idElim;
+    setColor(COLOR_TITULO);
+    cout << "Ingrese el ID del vendedor que desea eliminar:" << endl;
+    setColor(COLOR_DEFAULT);
+    cin >> idElim;
+
+    bool encontrado = false;
+
+    for (int i = 0; i < numVendedores; i++) {
+        if (vente[i].ID == idElim) {
+            encontrado = true;
+            for (int j = i; j < numVendedores - 1; j++) {
+                vente[j] = vente[j + 1];
+            }
+            numVendedores--;
+            setColor(COLOR_MENU);
+            cout << "Vendedor eliminado correctamente." << endl;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        setColor(COLOR_ERRORS);
+        cout << "No se encontró ningun vendedor con el ID especificado." << endl;
+    }
+}
+
+
 
 producto Alimentos = {1,"Arroz",35,"Es_de__Buena_Calidad","Bolsa","alimentos"};
 
@@ -328,11 +343,25 @@ int main() {
 
         switch (opcionUsuario) {
             case 1: {
+                limpiarPantalla();
+                imprimirEncabezado("Inicio de sesion");
+                string us, clave;
+                setColor(COLOR_TITULO);
+                cout << "Ingresa tu usuario:    ";
+                setColor(COLOR_DEFAULT);
+                cin>> us;
+                setColor(COLOR_TITULO);
+                cout << "Ingresa la clave:  ";
+                setColor(COLOR_DEFAULT);
+                cin>> clave;
+
+                if (us == "admin" && clave == "admin123"){
+                limpiarPantalla();
                 bool desconectar = false;
                 mostrarBienvenida("Administrador");
                 do {
                     const int OPCIONES_ADMIN = 5;
-                    int opcion2 = 0;
+                    int opcion2 = 1;
                     bool seleccion = false;
 
                     while (!seleccion) {
@@ -344,11 +373,11 @@ int main() {
                         setColor(opcion2 == 1 ? COLOR_MENU : COLOR_DEFAULT);
                         cout << (opcion2 == 1 ? "-> " : "   ") << "1) Mostrar productos a la venta por categoría\n";
                         setColor(opcion2 == 2 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion2 == 2 ? "-> " : "   ") << "2) Mostrar todos los vendedores recomendados por un usuario\n";
+                        cout << (opcion2 == 2 ? "-> " : "   ") << "2) Mostrar todos los vendedores\n";
                         setColor(opcion2 == 3 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion2 == 3 ? "-> " : "   ") << "3) Mostrar todos los usuarios\n";
+                        cout << (opcion2 == 3 ? "-> " : "   ") << "3) Eliminar un vendedor\n";
                         setColor(opcion2 == 4 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion2 == 4 ? "-> " : "   ") << "4) Agregar un usuario nuevo\n";
+                        cout << (opcion2 == 4 ? "-> " : "   ") << "4) Eliminar un producto\n";
                         setColor(opcion2 == 0 ? COLOR_MENU : COLOR_DEFAULT);
                         cout << (opcion2 == 0 ? "-> " : "   ") << "  <Desconectarse>\n\n";
                         setColor(COLOR_DEFAULT);
@@ -376,6 +405,10 @@ int main() {
                             break;
                         case 2:
                             limpiarPantalla();
+                            vente[numVendedores++] = {"1", "1234567890", "Miles Axelrod", "Frituras Dulces"};
+                            vente[numVendedores++] = {"2", "199221011", "Miles Prower", "Cajas de Mentas"};
+                            vente[numVendedores++] = {"3", "2003160316", "Edd G.", "Bebidas Gasificadas"};
+
                             mostrarvendedors();
                             setColor(COLOR_ERRORS);
                             cout << "\nPresione cualquier tecla para continuar...";
@@ -383,14 +416,14 @@ int main() {
                             break;
                         case 3:
                             limpiarPantalla();
-                            mostrarUsuarioss();
+                            eliminarVendedor();
                             setColor(COLOR_ERRORS);
                             cout << "\nPresione cualquier tecla para continuar...";
                             _getch();
                             break;
                         case 4:
                             limpiarPantalla();
-                            crearUsuarioss();
+                            eliminarProducto();
                             setColor(COLOR_ERRORS);
                             cout << "\nPresione cualquier tecla para continuar...";
                             _getch();
@@ -403,13 +436,36 @@ int main() {
                     }
                 } while (!desconectar);
                 break;
+            }else{
+                setColor(COLOR_ERRORS);
+                cout<<"\nDatos incorrectos (x _ x)\n";
+                setColor(COLOR_DEFAULT);
+                cout<<"\nPresione enter para regresar al menu principal";
+                getch();
+                return main();
             }
+
+            }
+
             case 2: {
+                limpiarPantalla();
+                imprimirEncabezado("Inicio de sesion");
+                string us, clave;
+                setColor(COLOR_TITULO);
+                cout << "\nIngresa tu usuario:    ";
+                setColor(COLOR_DEFAULT);
+                cin>> us;
+                setColor(COLOR_TITULO);
+                cout << "Ingresa la clave:  ";
+                setColor(COLOR_DEFAULT);
+                cin>> clave;
+
+                if (us == "usuario" && clave == "usuario123"){
                 bool desconectar = false;
                 mostrarBienvenida("Usuario Registrado");
                 do {
-                    const int OPCIONES_USUA = 6;
-                    int opcion3 = 0;
+                    const int OPCIONES_USUA = 5;
+                    int opcion3 = 1;
                     bool seleccion = false;
 
                     while (!seleccion) {
@@ -421,13 +477,11 @@ int main() {
                         setColor(opcion3 == 1 ? COLOR_MENU : COLOR_DEFAULT);
                         cout << (opcion3 == 1 ? "-> " : "   ") << "1) Mostrar productos a la venta por categoría\n";
                         setColor(opcion3 == 2 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion3 == 2 ? "-> " : "   ") << "2) Recomendar vendedor\n";
+                        cout << (opcion3 == 2 ? "-> " : "   ") << "2) Agregar un vendedor\n";
                         setColor(opcion3 == 3 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion3 == 3 ? "-> " : "   ") << "3) Mostrar todos los usuarios\n";
+                        cout << (opcion3 == 3 ? "-> " : "   ") << "4) Agregar un producto\n";
                         setColor(opcion3 == 4 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion3 == 4 ? "-> " : "   ") << "4) Valorar un producto\n";
-                        setColor(opcion3 == 5 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion3 == 5 ? "-> " : "   ") << "5) Eliminar un producto\n";
+                        cout << (opcion3 == 4 ? "-> " : "   ") << "5) Eliminar un producto\n";
                         setColor(opcion3 == 0 ? COLOR_MENU : COLOR_DEFAULT);
                         cout << (opcion3 == 0 ? "-> " : "   ") << "  <Desconectarse>\n\n";
                         setColor(COLOR_DEFAULT);
@@ -462,19 +516,12 @@ int main() {
                             break;
                         case 3:
                             limpiarPantalla();
-                            mostrarUsuarioss();
-                            setColor(COLOR_ERRORS);
-                            cout << "\nPresione cualquier tecla para continuar...";
-                            _getch();
-                            break;
-                        case 4:
-                            limpiarPantalla();
                             crearnew(Nuevos);
                             setColor(COLOR_ERRORS);
                             cout << "\nPresione cualquier tecla para continuar...";
                             _getch();
                             break;
-                        case 5:
+                        case 4:
                             limpiarPantalla();
                             eliminarProducto();
                             setColor(COLOR_ERRORS);
@@ -487,6 +534,14 @@ int main() {
                     }
                 } while (!desconectar);
                 break;
+                }else{
+                setColor(COLOR_ERRORS);
+                cout<<"\nDatos incorrectos (= _ =)\n";
+                setColor(COLOR_DEFAULT);
+                cout<<"\nPresione enter para regresar al menu principal";
+                getch();
+                return main();
+            }
             }
             case 3:
                 limpiarPantalla();
@@ -496,9 +551,9 @@ int main() {
             case 0:
                 limpiarPantalla();
                 setColor(COLOR_DEFAULT);
-                cout << "Saliendo del Mini Super...\n";
+                cout << "\n\n             Saliendo del Mini Super...\n";
                 setColor(COLOR_MENU);
-                cout << " ¡Hasta luego! (:D)\n";
+                cout << "\n                 ¡Hasta luego! (:D)\n\n\n";
                 setColor(COLOR_DEFAULT);
                 break;
             default:
