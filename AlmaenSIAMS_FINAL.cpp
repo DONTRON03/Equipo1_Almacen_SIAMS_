@@ -9,6 +9,8 @@ using namespace std;
 #define COLOR_MENU      14
 #define COLOR_TITULO    11
 #define COLOR_ERRORS    12
+#define COLOR_TEXTO2    9
+
 
 void limpiarPantalla() {
     system("cls");
@@ -38,13 +40,13 @@ int menuPrincipal(int opcionActual) {
         setColor(COLOR_MENU);
         cout << "Seleccione su tipo de usuario:\n\n";
         setColor(opcion == 1 ? COLOR_MENU : COLOR_DEFAULT);
-        cout << (opcion == 1 ? "-> " : "   ") << "1) Administrador\n";
+        cout << (opcion == 1 ? " >" : "   ") << "    Administrador\n";
         setColor(opcion == 2 ? COLOR_MENU : COLOR_DEFAULT);
-        cout << (opcion == 2 ? "-> " : "   ") << "2) Usuario Registrado\n";
+        cout << (opcion == 2 ? " >" : "   ") << "    Usuario Registrado\n";
         setColor(opcion == 3 ? COLOR_MENU : COLOR_DEFAULT);
-        cout << (opcion == 3 ? "-> " : "   ") << "3) Anonimo\n";
+        cout << (opcion == 3 ? " >" : "   ") << "    Anonimo\n";
         setColor(opcion == 0 ? COLOR_MENU : COLOR_DEFAULT);
-        cout << (opcion == 0 ? "-> " : "   ") << "  <Salir>     \n\n";
+        cout << (opcion == 0 ? " >" : "   ") << "    <Salir>     \n\n";
         setColor(COLOR_DEFAULT);
         cout << "\nUse las flechas arriba/abajo para seleccionar, y Enter para confirmar.\n";
 
@@ -271,8 +273,8 @@ producto Snacks = {3,"Hersey's",35,"Como_un_canto_al_paladar","Bolsa","snacks"};
 
 void mostrarProductosPorCategoria() {
     bool seleccionado = false;
-    int opcion = 0;
-    const int OPCIONES_CATEGORIAS = 4;
+    int opcion = 1;
+    const int OPCIONES_CATEGORIAS = 5;
 
     while (!seleccionado) {
         limpiarPantalla();
@@ -286,8 +288,10 @@ void mostrarProductosPorCategoria() {
         cout << (opcion == 2 ? "-> " : "   ") << "2) Bebidas\n";
         setColor(opcion == 3 ? COLOR_MENU : COLOR_DEFAULT);
         cout << (opcion == 3 ? "-> " : "   ") << "3) Snacks\n";
+        setColor(opcion == 4 ? COLOR_MENU : COLOR_DEFAULT);
+        cout << (opcion == 4 ? "-> " : "   ") << "  <Todas>\n\n";
         setColor(opcion == 0 ? COLOR_MENU : COLOR_DEFAULT);
-        cout << (opcion == 0 ? "-> " : "   ") << "  <Todas>\n\n";
+        cout << (opcion == 0 ? "-> " : "   ") << "  <Salir>\n\n";
         setColor(COLOR_DEFAULT);
         cout << "Use las flechas arriba/abajo para seleccionar, y Enter para confirmar.\n";
 
@@ -319,9 +323,11 @@ void mostrarProductosPorCategoria() {
             limpiarPantalla();
             info("snacks");
             break;
-        case 0:
+        case 4:
             limpiarPantalla();
             info("Todas");
+            break;
+        case 0:
             break;
     }
 
@@ -331,6 +337,11 @@ void mostrarProductosPorCategoria() {
 }
 
 int main() {
+
+    vente[numVendedores++] = {"1", "1234567890", "Miles Axelrod", "Frituras Dulces"};
+    vente[numVendedores++] = {"2", "199221011", "Miles Prower", "Cajas de Mentas"};
+    vente[numVendedores++] = {"3", "2003160316", "Edd G.", "Bebidas Gasificadas"};
+
     matriz[0]=Alimentos;
     matriz[1]=Bebidas;
     matriz[2]=Snacks;
@@ -346,14 +357,21 @@ int main() {
                 limpiarPantalla();
                 imprimirEncabezado("Inicio de sesion");
                 string us, clave;
-                setColor(COLOR_TITULO);
-                cout << "Ingresa tu usuario:    ";
+                setColor(COLOR_TEXTO2);
+                cout << "   -------------------------------------------------------"<<endl;
+                setColor(COLOR_TEXTO2);
+                cout <<"            Ingresa tu usuario: ";
+                setColor(COLOR_MENU);
+                cin>>us;
+                setColor(COLOR_TEXTO2);
+                cout <<"            Ingresa la clave:   ";
+                setColor(COLOR_MENU);
+                cin>>clave;
+                setColor(COLOR_TEXTO2);
+                cout << "   -------------------------------------------------------"<<endl;
                 setColor(COLOR_DEFAULT);
-                cin>> us;
-                setColor(COLOR_TITULO);
-                cout << "Ingresa la clave:  ";
-                setColor(COLOR_DEFAULT);
-                cin>> clave;
+                cout<<"Presiona ENTER para continuar...";
+                getch();
 
                 if (us == "admin" && clave == "admin123"){
                 limpiarPantalla();
@@ -371,15 +389,15 @@ int main() {
                         setColor(COLOR_MENU);
                         cout << "Opciones: " << endl;
                         setColor(opcion2 == 1 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion2 == 1 ? "-> " : "   ") << "1) Mostrar productos a la venta por categoría\n";
+                        cout << (opcion2 == 1 ? " >" : "   ") << "  Mostrar productos a la venta por categoría\n";
                         setColor(opcion2 == 2 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion2 == 2 ? "-> " : "   ") << "2) Mostrar todos los vendedores\n";
+                        cout << (opcion2 == 2 ? " >" : "   ") << "  Mostrar todos los vendedores\n";
                         setColor(opcion2 == 3 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion2 == 3 ? "-> " : "   ") << "3) Eliminar un vendedor\n";
+                        cout << (opcion2 == 3 ? " >" : "   ") << "  Eliminar un vendedor\n";
                         setColor(opcion2 == 4 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion2 == 4 ? "-> " : "   ") << "4) Eliminar un producto\n";
+                        cout << (opcion2 == 4 ? " >" : "   ") << "  Eliminar un producto\n";
                         setColor(opcion2 == 0 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion2 == 0 ? "-> " : "   ") << "  <Desconectarse>\n\n";
+                        cout << (opcion2 == 0 ? " >" : "   ") << "  <Desconectarse>\n\n";
                         setColor(COLOR_DEFAULT);
                         cout << "Use las flechas arriba/abajo para seleccionar, y Enter para confirmar.\n";
 
@@ -405,10 +423,6 @@ int main() {
                             break;
                         case 2:
                             limpiarPantalla();
-                            vente[numVendedores++] = {"1", "1234567890", "Miles Axelrod", "Frituras Dulces"};
-                            vente[numVendedores++] = {"2", "199221011", "Miles Prower", "Cajas de Mentas"};
-                            vente[numVendedores++] = {"3", "2003160316", "Edd G.", "Bebidas Gasificadas"};
-
                             mostrarvendedors();
                             setColor(COLOR_ERRORS);
                             cout << "\nPresione cualquier tecla para continuar...";
@@ -451,14 +465,21 @@ int main() {
                 limpiarPantalla();
                 imprimirEncabezado("Inicio de sesion");
                 string us, clave;
-                setColor(COLOR_TITULO);
-                cout << "\nIngresa tu usuario:    ";
+                setColor(COLOR_TEXTO2);
+                cout << "   -------------------------------------------------------"<<endl;
+                setColor(COLOR_TEXTO2);
+                cout <<"            Ingresa tu usuario: ";
+                setColor(COLOR_MENU);
+                cin>>us;
+                setColor(COLOR_TEXTO2);
+                cout <<"            Ingresa la clave:   ";
+                setColor(COLOR_MENU);
+                cin>>clave;
+                setColor(COLOR_TEXTO2);
+                cout << "   -------------------------------------------------------"<<endl;
                 setColor(COLOR_DEFAULT);
-                cin>> us;
-                setColor(COLOR_TITULO);
-                cout << "Ingresa la clave:  ";
-                setColor(COLOR_DEFAULT);
-                cin>> clave;
+                cout<<"Presiona ENTER para continuar...";
+                getch();
 
                 if (us == "usuario" && clave == "usuario123"){
                 bool desconectar = false;
@@ -475,15 +496,15 @@ int main() {
                         setColor(COLOR_MENU);
                         cout << "Opciones: " << endl;
                         setColor(opcion3 == 1 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion3 == 1 ? "-> " : "   ") << "1) Mostrar productos a la venta por categoría\n";
+                        cout << (opcion3 == 1 ? " >" : "   ") << "     Mostrar productos a la venta por categoría\n";
                         setColor(opcion3 == 2 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion3 == 2 ? "-> " : "   ") << "2) Agregar un vendedor\n";
+                        cout << (opcion3 == 2 ? " >" : "   ") << "     Agregar un vendedor\n";
                         setColor(opcion3 == 3 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion3 == 3 ? "-> " : "   ") << "4) Agregar un producto\n";
+                        cout << (opcion3 == 3 ? " >" : "   ") << "     Agregar un producto\n";
                         setColor(opcion3 == 4 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion3 == 4 ? "-> " : "   ") << "5) Eliminar un producto\n";
+                        cout << (opcion3 == 4 ? " >" : "   ") << "     Eliminar un producto\n";
                         setColor(opcion3 == 0 ? COLOR_MENU : COLOR_DEFAULT);
-                        cout << (opcion3 == 0 ? "-> " : "   ") << "  <Desconectarse>\n\n";
+                        cout << (opcion3 == 0 ? " >" : "   ") << "     <Desconectarse>\n\n";
                         setColor(COLOR_DEFAULT);
                         cout << "Use las flechas arriba/abajo para seleccionar, y Enter para confirmar.\n";
 
